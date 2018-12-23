@@ -27,6 +27,11 @@ cd %work_dir%
 IF NOT EXIST "%BackUp_DIR%\_HOUR\%hourTime%" (
 rmdir /Q /S %BackUp_DIR%\_HOUR\
 IF NOT EXIST "%BackUp_DIR%\_DAY\%DayTime%" (
+set current_dir="%cd%"
+cd %BackUp_DIR%\_DAY\
+"C:\Program Files\7-Zip\7z.exe" a -t7z  -ssw -mx9 -pPassword -r0 %BackUp_DIR%\_DAY\%AllDateTime%.7z *.*
+"C:\Program Files\7-Zip\7z.exe" a -t7z  -ssw -mx9 -pPassword -r0 %BackUp_DIR%\_DAY\%AllDateTime%.7z *.*
+cd %current_dir%
 rmdir /Q /S %BackUp_DIR%\_DAY\ 
 IF NOT EXIST "%BackUp_DIR%\_MONTH\%MONTHTime%" (
 rmdir /Q /S %BackUp_DIR%\_MONTH\ 
@@ -45,9 +50,9 @@ xcopy  "*.bad" "%BackUp_DIR%\_MONTH\%AllDateTime%"
 )
 mkdir %BackUp_DIR%\_DAY\%DayTime%
 mkdir %BackUp_DIR%\_DAY\%AllDateTime%
-xcopy  "*.dat" "%BackUp_DIR%\_DAY\%AllDateTime%"
-xcopy  "*.old" "%BackUp_DIR%\_DAY\%AllDateTime%"
-xcopy  "*.bad" "%BackUp_DIR%\_DAY\%AllDateTime%"
+rem xcopy  "*.dat" "%BackUp_DIR%\_DAY\%AllDateTime%"
+rem xcopy  "*.old" "%BackUp_DIR%\_DAY\%AllDateTime%"
+rem xcopy  "*.bad" "%BackUp_DIR%\_DAY\%AllDateTime%"
 
 )
 mkdir %BackUp_DIR%\_HOUR\%hourTime%

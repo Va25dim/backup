@@ -2,6 +2,7 @@ Set AllDateTime=%date:~6,4%.%date:~3,2%.%date:~0,2%-%time:~0,2%.%time:~3,2%
 Set DateTime=%date:~6,4%.%date:~3,2%.%date:~0,2%
 set HOURtime=%time:~0,2%
 Set DayTime=%date:~0,2%
+Set MONTHTime=%date:~3,2%
 Set HMTime=%time:~0,2%-%time:~3,2%
 set BackUp_DIR=backup
 set 7z_parm=a -t7z -m=LZMA -ssw -mx9 -pPassword -r0
@@ -27,6 +28,20 @@ IF NOT EXIST "%BackUp_DIR%\_HOUR\%hourTime%" (
 rmdir /Q /S %BackUp_DIR%\_HOUR\
 IF NOT EXIST "%BackUp_DIR%\_DAY\%DayTime%" (
 rmdir /Q /S %BackUp_DIR%\_DAY\ 
+IF NOT EXIST "%BackUp_DIR%\_MONTH\%MONTHTime%" (
+rmdir /Q /S %BackUp_DIR%\_MONTH\ 
+mkdir %BackUp_DIR%\_YEAR\%AllDateTime%
+xcopy  "*.dat" "%BackUp_DIR%\_YEAR\%AllDateTime%"
+xcopy  "*.old" "%BackUp_DIR%\_YEAR\%AllDateTime%"
+xcopy  "*.bad" "%BackUp_DIR%\_YEAR\%AllDateTime%"
+)
+mkdir %BackUp_DIR%\_MONTH\%MONTHTime%
+mkdir %BackUp_DIR%\_MONTH\%AllDateTime%
+xcopy  "*.dat" "%BackUp_DIR%\_MONTH\%AllDateTime%"
+xcopy  "*.old" "%BackUp_DIR%\_MONTH\%AllDateTime%"
+xcopy  "*.bad" "%BackUp_DIR%\_MONTH\%AllDateTime%"
+
+
 )
 mkdir %BackUp_DIR%\_DAY\%DayTime%
 mkdir %BackUp_DIR%\_DAY\%AllDateTime%
